@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:fruit_ecommerce/core/helper/constant.dart';
+import 'package:fruit_ecommerce/core/helper/shared_prefrence.dart';
+import 'package:fruit_ecommerce/feature/auth/presentation/view/login_view.dart';
 import 'package:fruit_ecommerce/feature/onBoarding/presentation/view/on_boarding_view.dart';
 
 class SplashView extends StatefulWidget {
@@ -24,21 +27,22 @@ class _SplashViewState extends State<SplashView> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Align(alignment: Alignment.topLeft,child: SvgPicture.asset('assets/images/svg/splash_planet.svg')),
+            Align(alignment: Alignment.topLeft,child: SvgPicture.asset('assets/images/splash_planet.svg')),
             
-            Center(child: SvgPicture.asset('assets/images/svg/splash_logo.svg'),),
+            Center(child: SvgPicture.asset('assets/images/splash_logo.svg'),),
           
-          SvgPicture.asset('assets/images/svg/splach_points.svg'),
+          SvgPicture.asset('assets/images/splach_points.svg'),
           ],
         ),
       ),
     );
   }
-  
+/// to navigate to onBoarding view  
   void executeNavigation() 
 {
+ final bool isViewOnBoarding= SharedPrefrenceHelper.getBool(prefOnBoardingKey);
   Future.delayed(Duration(seconds: 4)).then((value) {
-    Navigator.pushReplacementNamed(context, OnBoardingView.routeName);
+    Navigator.pushReplacementNamed(context,isViewOnBoarding==true?LoginView.routeName: OnBoardingView.routeName);
   },);
 }
 }
