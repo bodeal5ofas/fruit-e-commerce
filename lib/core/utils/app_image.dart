@@ -33,5 +33,7 @@ class Assets {
   /// Assets for assetsImagesSplashPlanet
   /// assets/images/splash_planet.svg
   static const String assetsImagesSplashPlanet = "assets/images/splash_planet.svg";
+  //assets/images/icon_checkbox.svg
+  static const String assetsImagesCheckBoxIcon = "assets/images/icon_checkbox.svg"; 
 }
 
