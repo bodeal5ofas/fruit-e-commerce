@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fruit_ecommerce/feature/auth/presentation/view/login_view.dart';
 import 'package:fruit_ecommerce/feature/auth/presentation/view/signup_view.dart';
+import 'package:fruit_ecommerce/feature/home/presentation/view/home_view.dart';
 import 'package:fruit_ecommerce/feature/onBoarding/presentation/view/on_boarding_view.dart';
 import 'package:fruit_ecommerce/feature/splash/presentation/view/splash_view.dart';
 
@@ -8,6 +9,8 @@ Route<dynamic> onGenratorRoute(RouteSettings setting){
   switch (setting.name) {
     case SplashView.routeName:
       return MaterialPageRoute(builder: (context) => SplashView(),);
+    case HomeView.routeName:
+      return MaterialPageRoute(builder: (context) => HomeView(),);
       case OnBoardingView.routeName:
       return MaterialPageRoute(builder: (context) => OnBoardingView(),);
       case SignupView.routeName:

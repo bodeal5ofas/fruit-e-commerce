@@ -16,6 +16,14 @@ dependencies:
   flutter_svg: ^2.2.0
   dots_indicator: ^4.0.1
   shared_preferences: ^2.5.3
+  firebase_core: ^4.2.0
+  dartz: ^0.10.1
+  firebase_auth: ^6.1.1
+  flutter_bloc: ^9.1.1
+  get_it: ^8.2.0
+  modal_progress_hud_nsn: ^0.5.1
+  google_sign_in: ^7.2.0
+  flutter_facebook_auth: ^7.1.2
   
 
 dev_dependencies:
