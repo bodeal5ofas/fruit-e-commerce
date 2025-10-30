@@ -6,12 +6,16 @@ import 'package:fruit_ecommerce/core/errors/custom_exception.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class FirebaseAuthService {
-  Future<User> userSignInWithEmailAndPassword({required String email,required String password })async{
+  Future<void> deleteUser()async{
+    await FirebaseAuth.instance.currentUser!.delete();
+  }
+  Future<User> userSignInWithEmailAndPassword({required String name,required String email,required String password })async{
     try {
   final credential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
     email: email,
     password: password,
   );
+  
   return credential.user!;
 } on FirebaseAuthException catch (e) {
       log('Exception: FirebaseAuthService.CreateUserWithEmailAndPassword= ${e.toString()}');
@@ -40,6 +44,8 @@ class FirebaseAuthService {
 } on FirebaseAuthException catch (e) {
   log('Exception: FirebaseAuthService.signInWithEmailAndPassword= ${e.toString()}');
   if (e.code == 'user-not-found') {
+    throw CustomException('البريد الالكتروني او الباسورد غير صحيح');
+  }else if(e.code == 'invalid-credential') {
     throw CustomException('البريد الالكتروني او الباسورد غير صحيح');
   } else if (e.code == 'wrong-password') {
     throw CustomException('البريد الالكتروني او الباسورد غير صحيح');
