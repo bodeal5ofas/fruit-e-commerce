@@ -8,7 +8,16 @@ import 'package:shared_preferences/shared_preferences.dart';
   static setBool(String key,bool value)async{
     await    _instant.setBool(key, value);
   }
+
   static bool getBool(String key){
    return _instant.getBool(key)?? false;
+  }
+
+   static setString(String key,String value)async{
+    await    _instant.setString(key, value);
+  }
+
+  static String getString(String key){
+   return _instant.getString(key)?? '';
   }
 }

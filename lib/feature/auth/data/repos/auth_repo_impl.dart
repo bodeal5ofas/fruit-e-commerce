@@ -1,15 +1,18 @@
+import 'dart:convert';
 import 'dart:developer';
-
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fruit_ecommerce/core/errors/custom_exception.dart';
 import 'package:fruit_ecommerce/core/errors/failure.dart';
+import 'package:fruit_ecommerce/core/helper/constant.dart';
+import 'package:fruit_ecommerce/core/helper/shared_prefrence.dart';
 import 'package:fruit_ecommerce/core/service/data_service.dart';
 import 'package:fruit_ecommerce/core/service/firebase_auth_service.dart';
-import 'package:fruit_ecommerce/core/service/firestore_service.dart';
+//import 'package:fruit_ecommerce/core/service/firestore_service.dart';
 import 'package:fruit_ecommerce/feature/auth/data/models/user_model.dart';
 import 'package:fruit_ecommerce/feature/auth/domain/entites/user_entity.dart';
 import 'package:fruit_ecommerce/feature/auth/domain/repos/auth_repo.dart';
+//import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthRepoImpl implements AuthRepo{
   FirebaseAuthService firebaseAuth;
@@ -46,6 +49,7 @@ class AuthRepoImpl implements AuthRepo{
     try{
       User user =await firebaseAuth.signInWithEmailAndPassword(email: email, password: password);
       var userEntity=await getUserData(userId: user.uid, path: 'user');
+   await   saveUserData(user: userEntity);
       return Right(userEntity);
     }
     on CustomException catch(e){
@@ -72,6 +76,7 @@ class AuthRepoImpl implements AuthRepo{
   else{
   await addUser(user: userEntity);
 }
+   await   saveUserData(user: userEntity);
   return Right(userEntity);
 } on Exception catch (e) {
   await deleteUser(user);
@@ -95,7 +100,7 @@ class AuthRepoImpl implements AuthRepo{
   else{
   await addUser(user: userEntity);
 }
-      
+       await   saveUserData(user: userEntity);
       return Right(UserModel.fromFirebase(user: user));
     } on Exception catch (e) {
       await deleteUser(user);
@@ -107,12 +112,20 @@ class AuthRepoImpl implements AuthRepo{
   @override
   Future<void> addUser({required UserEntity user}) async{
     // throw CustomException('try agin, in another time.');
- await  dataService.addData(path: 'user', data:user.toMap(),documentId: user.uId);
+   var userEntity= UserModel.fromEntity(user: user).toMap();
+ await  dataService.addData(path: 'user', data:userEntity,documentId: user.uId);
   }
   
   @override
   Future<UserEntity> getUserData({required String userId, required String path}) async{
   var json= await dataService.getData(path: path, documentId: userId);
   return UserModel.fromJson(json);
+  }
+  
+  @override
+  Future<void> saveUserData({required UserEntity user}) async{
+  String json = jsonEncode(UserModel.fromEntity(user: user).toMap());
+  log(json);
+ await SharedPrefrenceHelper.setString(kUserData, json);
   }
 }

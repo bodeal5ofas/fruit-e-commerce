@@ -6,6 +6,7 @@ import 'package:fruit_ecommerce/core/helper/custom_bloc_observer.dart';
 import 'package:fruit_ecommerce/core/helper/depedce_injection.dart';
 import 'package:fruit_ecommerce/core/helper/on_genrator_route.dart';
 import 'package:fruit_ecommerce/core/helper/shared_prefrence.dart';
+import 'package:fruit_ecommerce/feature/home/presentation/view/master_view.dart';
 import 'package:fruit_ecommerce/feature/splash/presentation/view/splash_view.dart';
 import 'package:fruit_ecommerce/firebase_options.dart';
 import 'package:fruit_ecommerce/generated/l10n.dart';
@@ -38,6 +39,7 @@ class FruitEcommerce extends StatelessWidget {
             locale: Locale('ar'),
       debugShowCheckedModeBanner: false,
       onGenerateRoute:(settings) => onGenratorRoute(settings),
+      // replace home by splace view.
       initialRoute: SplashView.routeName,
     );
   }

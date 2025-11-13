@@ -43,7 +43,7 @@ bool obscureText=true;
                     return 'البريد الالكتروني مطلوب';
                   }else if(!RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
                 .hasMatch(value)){  
-          return 'البريد الالكتروني غير صحيح';                
+          return 'البريد الالكتروني غير مسموح به';                
                   }else{
                     return null;
                   }
@@ -59,7 +59,7 @@ bool obscureText=true;
                     return 'كلمة المرور  مطلوبة';
                   }else if(!RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$')
                 .hasMatch(value)){  
-          return 'كلمة المرور غير صحيح';                
+          return 'كلمة المرور غير مسموح به';                
                   }else{
                     return null;
                   }

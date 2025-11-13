@@ -100,6 +100,7 @@ Future<User> signInWithFacebook() async {
   return (await FirebaseAuth.instance.signInWithCredential(facebookAuthCredential)).user!;
 }
 
+bool isLogin() => FirebaseAuth.instance.currentUser != null;
 
 
 
